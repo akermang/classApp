@@ -82,18 +82,8 @@ class AddressComponent {
 
     let addressButton = this.element.find("button.btn-address");
     let addressSection = this.element.find(".address-content");
-    addressButton.on("click", () => {
-      //
+    addressButton.on("click", () => { 
       addressSection.toggle("fast", function() {});
     });
-
-    // editButton.on("click", ()=>{
-    //    let inputVale =  prompt(`edit: ${this.user.name}`);
-    //    let editElement = this.element.find(".spn-name");
-    //    editElement.html(inputVale)
-    // })
-    // removeButton.on("click", ()=>{
-    //   this.element.remove();
-    // });
   }
 }
