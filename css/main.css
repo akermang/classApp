@@ -90,10 +90,6 @@ main ul li{
   padding: 1em;
 }
 
-[class^="address-content"]{
-  display: none;
-}
-
 [class^="btn"]{
   background: #007480;
   color: white;

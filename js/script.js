@@ -2,6 +2,7 @@ class UserComponent {
   constructor(user) {
     this.user = user;
     this.createElement();
+    this.onRemove = () => {};
   }
 
   createElement() {
@@ -24,7 +25,7 @@ class UserComponent {
       editElement.html(inputVale);
     });
     removeButton.on("click", () => {
-      this.element.remove();
+      this.onRemove();
     });
   }
 }
@@ -41,6 +42,7 @@ class UsersListComponent {
     for (let user of this.usersList) {
       let liEl = $("<li></li>");
       let userComp = new UserComponent(user);
+      userComp.onRemove = () => liEl.remove();
       let addressComp = new AddressComponent(user.address);
       liEl.append(userComp.element);
       liEl.append(addressComp.element);
@@ -53,12 +55,6 @@ $.get("https://jsonplaceholder.typicode.com/users", function(response) {
   let comp = new UsersListComponent(response);
   $("main").append(comp.element);
 });
-
-//   function emptyElement(element){
-//     while (element.hasChildNodes()){
-//          element.removeChild(element.lastChild)
-//     }
-// }
 
 class AddressComponent {
   constructor(address) {
@@ -76,13 +72,14 @@ class AddressComponent {
           <p class="spn-city">${this.city}</p>
           <p class="spn-zipcode">${this.zipcode}</p>
         </div>
-        <button class="btn-address">Address</button>
+        <button class="btn-address">Toggle Address</button>
       </div>
     `);
 
     let addressButton = this.element.find("button.btn-address");
     let addressSection = this.element.find(".address-content");
-    addressButton.on("click", () => { 
+    addressSection.hide();
+    addressButton.on("click", () => {
       addressSection.toggle("fast", function() {});
     });
   }
